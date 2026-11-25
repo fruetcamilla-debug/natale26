@@ -1,0 +1,9 @@
+{
+  "name": "Calendario dell'Avvento",
+  "short_name": "Avvento",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f1e1",
+  "theme_color": "#2e5a1c",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

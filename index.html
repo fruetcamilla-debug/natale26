@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2e5a1c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Avvento">
+  <title>Calendario dell'Avvento</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Pinyon+Script&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="preview-banner" hidden>
+    Modalità anteprima: tutto sbloccato
+    <button id="reset-btn" type="button">Azzera</button>
+  </div>
+
+  <!-- PIN -->
+  <section id="lock" class="screen" hidden>
+    <div class="lock-card">
+      <img class="lock-tree" src="img/albero.png" alt="" width="517" height="780">
+      <p class="title-script">Calendario dell'Avvento</p>
+      <p class="lock-sub">Inserisci il PIN per entrare</p>
+      <div id="pin-dots" class="pin-dots" aria-live="polite"></div>
+      <p id="pin-msg" class="pin-msg" role="status"></p>
+      <div id="keypad" class="keypad">
+        <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button>
+        <button type="button" data-k="4">4</button><button type="button" data-k="5">5</button><button type="button" data-k="6">6</button>
+        <button type="button" data-k="7">7</button><button type="button" data-k="8">8</button><button type="button" data-k="9">9</button>
+        <span></span><button type="button" data-k="0">0</button><button type="button" data-k="del" aria-label="Cancella">⌫</button>
+      </div>
+      <label class="pin-remember"><input type="checkbox" id="pin-remember" checked> Ricorda su questo telefono</label>
+    </div>
+  </section>
+
+  <!-- SCHERMATA INIZIALE -->
+  <section id="intro" class="screen" hidden>
+    <div class="snow" aria-hidden="true"></div>
+    <div class="intro-card">
+      <img class="tree" src="img/albero.png" alt="" width="517" height="780">
+      <h1 class="title-deco">NATALE</h1>
+      <p class="title-script">Calendario dell'Avvento</p>
+      <p class="intro-for">per <span id="intro-name"></span></p>
+      <p class="intro-text">Nei giorni dispari si apre una birra.<br>In quelli pari gira la ruota della fortuna.<br>Una sorpresa ogni giorno, fino a Natale.</p>
+      <button id="start-btn" class="btn-primary" type="button">Inizia ad aprire</button>
+    </div>
+  </section>
+
+  <!-- CALENDARIO -->
+  <section id="calendar" class="screen" hidden>
+    <header class="countdown">
+      <h2 id="cd-title">Al Natale mancano</h2>
+      <div class="cd-row" id="cd-row">
+        <div class="cd-unit"><span id="cd-d">00</span><em>giorni</em></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit"><span id="cd-h">00</span><em>ore</em></div>
+        <span class="cd-sep">:</span>
+        <div class="cd-unit"><span id="cd-m">00</span><em>minuti</em></div>
+      </div>
+    </header>
+    <div id="today-greet" hidden></div>
+    <div id="grid" class="grid"></div>
+    <div class="legend">🍺 birra &nbsp;·&nbsp; 🎡 ruota &nbsp;·&nbsp; 🍷 giorno speciale</div>
+  </section>
+
+  <!-- DIARIO -->
+  <section id="diary" class="screen" hidden>
+    <header class="diary-head">
+      <h2 class="title-script">Il nostro diario</h2>
+      <p>Le birre bevute, i voti e le sfide uscite.</p>
+    </header>
+    <div id="diary-list"></div>
+  </section>
+
+  <!-- NAVIGAZIONE -->
+  <nav id="nav" hidden>
+    <button type="button" data-go="calendar" class="active" aria-label="Calendario">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+    </button>
+    <button type="button" data-go="diary" aria-label="Diario">
+      <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+    </button>
+  </nav>
+
+  <!-- MODALE -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="sheet" role="dialog" aria-modal="true">
+      <button class="sheet-close" type="button" data-close aria-label="Chiudi">✕</button>
+      <div id="sheet-body"></div>
+    </div>
+  </div>
+
+  <div id="toast" role="status"></div>
+  <input type="file" id="photo-input" accept="image/*" capture="environment" hidden>
+
+  <script src="contenuto.js"></script>
+  <script src="lock.js"></script>
+</body>
+</html>
